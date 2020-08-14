@@ -71,7 +71,8 @@ export default class AuthController implements BaseController {
 
     await this.authRepository.createUser(
       email,
-      await this.generatHashPassword(password)
+      await this.generatHashPassword(password),
+      username
     );
 
     ctx.status = 200;
@@ -109,17 +110,11 @@ export default class AuthController implements BaseController {
       ctx.throw(400, "Email has not been found");
     }
 
-    if (!user.isConfirmed) {
-      ctx.throw(
-        400,
-        `Please confirm your email. A message has been sent to ${email}.`
-      );
-    }
-
     const isMatchEmailPassword = await bcrypt.compare(
       password,
       user.passwordHash
     );
+
     if (!isMatchEmailPassword) {
       ctx.throw(400, "Email and password do not match");
     }
@@ -127,6 +122,7 @@ export default class AuthController implements BaseController {
     ctx.body = {
       userId: user.id,
       token: this.authValidator.generateAccessToken(user),
+      username: user.username,
     };
     ctx.status = 200;
   };

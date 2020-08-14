@@ -37,7 +37,6 @@ const authController = new AuthController(
   authValidator
 );
 
-
 // Routes
 const router = new Router().prefix("/api").use(authController.getRoutes());
 
@@ -64,9 +63,6 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
-
 app.listen(process.env.SERVER_PORT, () => {
-  console.log(
-    `Server in running on ${process.env.SERVER_PORT}.`
-  );
+  console.log(`Server in running on ${process.env.SERVER_PORT}.`);
 });

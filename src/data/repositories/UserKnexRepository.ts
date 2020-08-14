@@ -19,6 +19,7 @@ export default class UserKnexRepository implements UserRepository {
       return {
         id: userModel.id,
         email: userModel.email,
+        username: userModel.username,
         passwordHash: userModel.password_hash,
       };
     } else {
@@ -33,6 +34,7 @@ export default class UserKnexRepository implements UserRepository {
       return {
         id: userModel.id,
         email: userModel.email,
+        username: userModel.username,
         passwordHash: userModel.password_hash,
       };
     } else {
@@ -42,10 +44,12 @@ export default class UserKnexRepository implements UserRepository {
 
   public createUser = async (
     email: string,
-    passwordHash: string
+    passwordHash: string,
+    username: string
   ): Promise<User> => {
     await this.knex("users").insert({
       email,
+      username: username,
       password_hash: passwordHash,
       is_confirmed: false,
       password_creation_time: Date.now(),
@@ -84,6 +88,7 @@ export default class UserKnexRepository implements UserRepository {
     return {
       id: userModel.id,
       email: userModel.email,
+      username: userModel.username,
       passwordHash: userModel.password_hash,
     };
   };

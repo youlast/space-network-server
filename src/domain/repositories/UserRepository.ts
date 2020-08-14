@@ -5,5 +5,9 @@ export default interface UserRepository {
 
   getUserById(id: number): Promise<any | undefined>;
 
-  createUser(email: string, passwordHash: string): Promise<User>;
+  createUser(
+    email: string,
+    passwordHash: string,
+    username: string
+  ): Promise<User>;
 }
