@@ -1,0 +1,75 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // Do not need it
+    "@typescript-eslint/no-inferrable-types": "off",
+    "lines-between-class-members": "off",
+    // Cause problems with Prettier
+    "operator-linebreak": "off",
+    // Disallowed by AirBnB style Guide
+    "space-before-function-paren": "off",
+    "semi": "off",
+    // Allows empty lines in comments
+    "no-trailing-spaces": [2, { "ignoreComments": true }],
+    // Allows 'console.log(...)'
+    "no-console": "off",
+    // Allows 'alert(...)'
+    "no-alert": "off",
+    // Allows to use <label> for <input> and <input> without
+    // being nested in each other. With Bootstrap it helps to
+    // align elements by one side (line) - if elements are nested
+    // it is hard to achieve the same result.
+    "jsx-a11y/label-has-associated-control": "off",
+    // Allows use class methods without 'this'. It is required
+    // because in some cases method should be attached to
+    // specific class
+    "class-methods-use-this": "off",
+    // This application shouldn't have support for people
+    // with disabilities
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    // Sometimes we need to use links as buttons
+    "jsx-a11y/anchor-is-valid": "off",
+    // Allows one line destructuring in params
+    "object-curly-newline": "off",
+    // Unneccessary, when we use two buttons in group
+    "jsx-a11y/control-has-associated-label": "off",
+    // Sometimes it breakes readability
+    "no-lonely-if": "off",
+    // These rules cause problems with TypeScript files,
+    // however TS compiler detects them
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    // Causes problems with TypeScript declaring
+    "spaced-comment": "off",
+    // Causes problems when editing JSON files
+    // in TypeScript files
+    "@typescript-eslint/camelcase": "off",
+    // Required in TypeScript JSON models
+    "camelcase": "off",
+    // Not always reasonable
+    "arrow-body-style": "off",
+    // We use Prettier formating and it is sometimes
+    // not similar to ESLint
+    "indent": "off",
+    // We use ts-ignore only when it is really needed.
+    // For example, in case of refactoring
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
+  }
+}
