@@ -1,13 +1,15 @@
 import Knex from "knex";
+import BlogRepository from "../../../domain/repositories/blog/BlogRepository";
+import BlogModel from "../../models/blog/BlogModel";
 
-export default class BlogKnexRepository {
+export default class BlogKnexRepository implements BlogRepository {
   private knex: Knex;
 
-  public constructor(knex: Knex<any, Array<any>>) {
+  public constructor(knex: Knex<BlogModel, Array<BlogModel>>) {
     this.knex = knex;
   }
 
-  public getAllPosts = () => {
+  public getAllPosts = (): Promise<void> => {
     return this.knex("allposts");
   };
 
@@ -15,7 +17,7 @@ export default class BlogKnexRepository {
     content: string,
     imagePost: string,
     title: string
-  ) => {
+  ): Promise<void> => {
     await this.knex("allposts").insert({
       title,
       imagePost,

@@ -1,9 +1,8 @@
-import UserRepository from "../../domain/repositories/UserRepository";
+import UserRepository from "../../domain/repositories/auth/UserRepository";
 import Router from "koa-router";
 import { ParameterizedContext } from "koa";
 import bcrypt from "bcryptjs";
 import BaseController from "../BaseContoller";
-import EmailHelper from "../../domain/models/email/EmailHelper";
 import AuthValidator from "./AuthValidator";
 
 export default class AuthController implements BaseController {

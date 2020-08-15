@@ -1,7 +1,7 @@
 import Knex from "knex";
 import User from "../../../domain/structures/User";
-import UserModel from "../../models/UserModel";
-import UserRepository from "../../../domain/repositories/UserRepository";
+import UserModel from "../../models/auth/UserModel";
+import UserRepository from "../../../domain/repositories/auth/UserRepository";
 
 export default class UserKnexRepository implements UserRepository {
   private knex: Knex;

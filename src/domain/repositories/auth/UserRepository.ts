@@ -1,4 +1,4 @@
-import User from "../structures/User";
+import User from "../../structures/User";
 
 export default interface UserRepository {
   getUserByEmail(email: string): Promise<any | undefined>;

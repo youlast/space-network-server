@@ -2,7 +2,7 @@ import User from "../../domain/structures/User";
 import jwt from "jsonwebtoken";
 import { ParameterizedContext } from "koa";
 import AccessTokenPayload from "./AccessTokenPayload";
-import UserRepository from "../../domain/repositories/UserRepository";
+import UserRepository from "../../domain/repositories/auth/UserRepository";
 
 export default class AuthValidator {
   private userRepository: UserRepository;

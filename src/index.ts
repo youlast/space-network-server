@@ -16,17 +16,18 @@ import UserKnexRepository from "./data/repositories/auth/UserKnexRepository";
 // @ts-ignore is needed to import external file
 import { databaseConfig } from "../knexfile";
 
-import UserRepository from "./domain/repositories/UserRepository";
+import UserRepository from "./domain/repositories/auth/UserRepository";
 import AuthValidator from "./controllers/auth/AuthValidator";
 import BlogKnexRepository from "./data/repositories/blog/BlogKnexRepository";
 import BlogController from "./controllers/blog/BlogController";
+import BlogRepository from "./domain/repositories/blog/BlogRepository";
 
 // Database
 const knexConnection = knex(databaseConfig);
 
 // Repositories
 const userRepository: UserRepository = new UserKnexRepository(knexConnection);
-const blogRepository: any = new BlogKnexRepository(knexConnection);
+const blogRepository: BlogRepository = new BlogKnexRepository(knexConnection);
 
 const authValidator = new AuthValidator(
   userRepository,
