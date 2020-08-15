@@ -1,7 +1,7 @@
-import UserRepository from "../../domain/repositories/UserRepository";
-import UserModel from "../models/UserModel";
 import Knex from "knex";
-import User from "../../domain/structures/User";
+import User from "../../../domain/structures/User";
+import UserModel from "../../models/UserModel";
+import UserRepository from "../../../domain/repositories/UserRepository";
 
 export default class UserKnexRepository implements UserRepository {
   private knex: Knex;
@@ -51,9 +51,6 @@ export default class UserKnexRepository implements UserRepository {
       email,
       username: username,
       password_hash: passwordHash,
-      is_confirmed: false,
-      password_creation_time: Date.now(),
-      auth_type: "email",
     });
 
     const user = await this.getUserByEmail(email);
