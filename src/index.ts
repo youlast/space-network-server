@@ -35,13 +35,9 @@ const authValidator = new AuthValidator(
 );
 
 // Controllers
-const authController = new AuthController(
-  userRepository,
-  process.env.CLIENT_HOST || "",
-  authValidator
-);
+const authController = new AuthController(userRepository, authValidator);
 
-const blogController = new BlogController(blogRepository);
+const blogController = new BlogController(blogRepository, authValidator);
 
 // Routes
 const router = new Router()

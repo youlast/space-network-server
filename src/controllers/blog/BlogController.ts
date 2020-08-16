@@ -1,12 +1,15 @@
 import Router from "koa-router";
 import { ParameterizedContext } from "koa";
 import BlogRepository from "../../domain/repositories/blog/BlogRepository";
+import AuthValidator from "../auth/AuthValidator";
 
 export default class BlogController {
   private readonly blogRepository: BlogRepository;
+  private readonly authValidator: AuthValidator;
 
-  constructor(blogRepository: BlogRepository) {
+  constructor(blogRepository: BlogRepository, authValidator: AuthValidator) {
     this.blogRepository = blogRepository;
+    this.authValidator = authValidator;
   }
 
   public getRoutes = (): Router.IMiddleware => {
@@ -14,8 +17,21 @@ export default class BlogController {
       new Router()
         // General
         .get("/blog/posts", this.getAllPosts)
-        .post("/blog/create_post", this.createPost)
-        .put("/blog/update_post", this.updatePost)
+        .post(
+          "/blog/create_post",
+          this.authValidator.validateAuth,
+          this.createPost
+        )
+        .put(
+          "/blog/update_post",
+          this.authValidator.validateAuth,
+          this.updatePost
+        )
+        .delete(
+          "/blog/delete_post",
+          this.authValidator.validateAuth,
+          this.deletePost
+        )
         .routes()
     );
   };
@@ -43,7 +59,7 @@ export default class BlogController {
 
     await this.blogRepository.createPost(content, imagePost, title);
 
-    ctx.status = 200;
+    ctx.status = 201;
   };
 
   /**
@@ -109,6 +125,36 @@ export default class BlogController {
       await this.blogRepository.updatePost(title, content, imagePost, idPost);
     } else {
       ctx.throw(400, "IdPost has not been specified");
+    }
+
+    ctx.status = 200;
+  };
+
+  /**
+   * @api {put} /api/blog/delete_post /api/blog/delete_post
+   * @apiGroup blog
+   *
+   * @apiParam {string} idPost
+   *
+   * @apiSuccessExample Success-Response:
+   *   HTTP/1.1 200 OK
+   
+   *
+   * @apiErrorExample {json} Error-Response:
+   * 1) Title has not been specified
+   * 2) Content has not been specified
+   * 3) IdPost has not been specified
+   */
+
+  public deletePost = async (ctx: ParameterizedContext): Promise<void> => {
+    const { idPost } = ctx.request.body;
+
+    console.log(idPost);
+
+    if (!idPost) ctx.throw(400, "Id has not been specified");
+
+    if (idPost) {
+      await this.blogRepository.deletePost(idPost);
     }
 
     ctx.status = 200;

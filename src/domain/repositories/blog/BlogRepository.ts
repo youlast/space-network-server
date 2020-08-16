@@ -9,4 +9,6 @@ export default interface BlogRepository {
     imagePost: string,
     idPost: string
   ): Promise<void>;
+
+  deletePost(idPost: string): Promise<void>;
 }

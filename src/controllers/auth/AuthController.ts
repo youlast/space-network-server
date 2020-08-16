@@ -7,16 +7,13 @@ import AuthValidator from "./AuthValidator";
 
 export default class AuthController implements BaseController {
   private readonly authRepository: UserRepository;
-  private readonly clientHost: string;
   private readonly authValidator: AuthValidator;
 
   public constructor(
     authRepository: UserRepository,
-    clientHost: string,
     authValidator: AuthValidator
   ) {
     this.authRepository = authRepository;
-    this.clientHost = clientHost;
     this.authValidator = authValidator;
   }
 

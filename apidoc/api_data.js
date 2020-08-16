@@ -178,6 +178,47 @@ define({ "api": [
   },
   {
     "type": "put",
+    "url": "/api/blog/delete_post",
+    "title": "/api/blog/delete_post",
+    "group": "blog",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "idPost",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "1) Title has not been specified\n2) Content has not been specified\n3) IdPost has not been specified",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/blog/BlogController.ts",
+    "groupTitle": "blog",
+    "name": "PutApiBlogDelete_post"
+  },
+  {
+    "type": "put",
     "url": "/api/blog/update_post",
     "title": "/api/blog/update_post",
     "group": "blog",

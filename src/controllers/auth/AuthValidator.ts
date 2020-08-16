@@ -13,7 +13,10 @@ export default class AuthValidator {
     this.secretKey = secretKey;
   }
 
-  public validateAuth = async (ctx: ParameterizedContext): Promise<void> => {
+  public validateAuth = async (
+    ctx: ParameterizedContext,
+    next: () => Promise<void>
+  ): Promise<void> => {
     let token = ctx.request.headers.Authorization;
     if (!token) token = ctx.request.headers.authorization;
 
@@ -42,6 +45,8 @@ export default class AuthValidator {
     } catch (e) {
       ctx.throw(400, "Access token is not valid");
     }
+
+    next();
   };
 
   public getUserFromToken = async (

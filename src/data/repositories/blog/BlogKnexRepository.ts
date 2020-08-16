@@ -38,4 +38,9 @@ export default class BlogKnexRepository implements BlogRepository {
       content,
     });
   };
+
+  public deletePost = async (idPost: string): Promise<void> => {
+    const data = await this.knex("allposts").where({ id: idPost }).delete();
+    console.log(data);
+  };
 }
