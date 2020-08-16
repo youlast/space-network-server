@@ -175,5 +175,67 @@ define({ "api": [
     "filename": "src/controllers/blog/BlogController.ts",
     "groupTitle": "blog",
     "name": "PostApiBlogSignup"
+  },
+  {
+    "type": "put",
+    "url": "/api/blog/update_post",
+    "title": "/api/blog/update_post",
+    "group": "blog",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "imagePost",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "idPost",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "1) Title has not been specified\n2) Content has not been specified\n3) IdPost has not been specified",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/blog/BlogController.ts",
+    "groupTitle": "blog",
+    "name": "PutApiBlogUpdate_post"
   }
 ] });

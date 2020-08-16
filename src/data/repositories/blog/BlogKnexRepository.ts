@@ -10,7 +10,8 @@ export default class BlogKnexRepository implements BlogRepository {
   }
 
   public getAllPosts = (): Promise<void> => {
-    return this.knex("allposts");
+    //@ts-ignore
+    return this.knex("allposts").orderBy("id");
   };
 
   public createPost = async (
@@ -19,6 +20,19 @@ export default class BlogKnexRepository implements BlogRepository {
     title: string
   ): Promise<void> => {
     await this.knex("allposts").insert({
+      title,
+      imagePost,
+      content,
+    });
+  };
+
+  public updatePost = async (
+    title: string,
+    content: string,
+    imagePost: string,
+    idPost: string
+  ): Promise<void> => {
+    await this.knex("allposts").where({ id: idPost }).update({
       title,
       imagePost,
       content,

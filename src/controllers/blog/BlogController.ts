@@ -15,6 +15,7 @@ export default class BlogController {
         // General
         .get("/blog/posts", this.getAllPosts)
         .post("/blog/create_post", this.createPost)
+        .put("/blog/update_post", this.updatePost)
         .routes()
     );
   };
@@ -70,5 +71,46 @@ export default class BlogController {
     } else {
       ctx.throw(400, "Posts not found");
     }
+  };
+
+  /**
+   * @api {put} /api/blog/update_post /api/blog/update_post
+   * @apiGroup blog
+   *
+   * @apiParam {string} title
+   * @apiParam {string} content
+   * @apiParam {string} imagePost
+   * @apiParam {string} idPost
+   *
+   * @apiSuccessExample Success-Response:
+   *   HTTP/1.1 200 OK
+   
+   *
+   * @apiErrorExample {json} Error-Response:
+   * 1) Title has not been specified
+   * 2) Content has not been specified
+   * 3) IdPost has not been specified
+   */
+
+  public updatePost = async (ctx: ParameterizedContext): Promise<void> => {
+    const { title, imagePost, content, idPost } = ctx.request.body;
+
+    console.log(title);
+    console.log(imagePost);
+    console.log(content);
+
+    if (!title) ctx.throw(400, "Title has not been specified");
+
+    if (!content) ctx.throw(400, "Content has not been specified");
+
+    if (!idPost) ctx.throw(400, "IdPost has not been specified");
+
+    if (idPost) {
+      await this.blogRepository.updatePost(title, content, imagePost, idPost);
+    } else {
+      ctx.throw(400, "IdPost has not been specified");
+    }
+
+    ctx.status = 200;
   };
 }
