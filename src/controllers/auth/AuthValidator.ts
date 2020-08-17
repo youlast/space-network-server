@@ -46,6 +46,8 @@ export default class AuthValidator {
       ctx.throw(400, "Access token is not valid");
     }
 
+    ctx.status = 200;
+
     next();
   };
 

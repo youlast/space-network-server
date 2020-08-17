@@ -85,7 +85,8 @@ export default class AuthController implements BaseController {
    *   HTTP/1.1 200 OK
    *   {
    *     "userId": 12345,
-   *     "token": "token"
+   *     "token": "token",
+   *     "username":"username"
    *   }
    *
    * @apiErrorExample {json} Error-Response:

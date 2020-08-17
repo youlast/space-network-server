@@ -111,10 +111,6 @@ export default class BlogController {
   public updatePost = async (ctx: ParameterizedContext): Promise<void> => {
     const { title, imagePost, content, idPost } = ctx.request.body;
 
-    console.log(title);
-    console.log(imagePost);
-    console.log(content);
-
     if (!title) ctx.throw(400, "Title has not been specified");
 
     if (!content) ctx.throw(400, "Content has not been specified");
@@ -148,8 +144,6 @@ export default class BlogController {
 
   public deletePost = async (ctx: ParameterizedContext): Promise<void> => {
     const { idPost } = ctx.request.body;
-
-    console.log(idPost);
 
     if (!idPost) ctx.throw(400, "Id has not been specified");
 
