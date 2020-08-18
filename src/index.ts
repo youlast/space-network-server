@@ -37,7 +37,11 @@ const authValidator = new AuthValidator(
 // Controllers
 const authController = new AuthController(userRepository, authValidator);
 
-const blogController = new BlogController(blogRepository, authValidator);
+const blogController = new BlogController(
+  blogRepository,
+  authValidator,
+  userRepository
+);
 
 // Routes
 const router = new Router()

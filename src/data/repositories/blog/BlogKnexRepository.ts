@@ -17,12 +17,14 @@ export default class BlogKnexRepository implements BlogRepository {
   public createPost = async (
     content: string,
     imagePost: string,
-    title: string
+    title: string,
+    authorPost: string
   ): Promise<void> => {
     await this.knex("allposts").insert({
       title,
       imagePost,
       content,
+      authorPost,
     });
   };
 

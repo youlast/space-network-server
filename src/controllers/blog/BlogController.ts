@@ -2,14 +2,21 @@ import Router from "koa-router";
 import { ParameterizedContext } from "koa";
 import BlogRepository from "../../domain/repositories/blog/BlogRepository";
 import AuthValidator from "../auth/AuthValidator";
+import UserRepository from "../../domain/repositories/auth/UserRepository";
 
 export default class BlogController {
   private readonly blogRepository: BlogRepository;
   private readonly authValidator: AuthValidator;
+  private readonly userRepository: UserRepository;
 
-  constructor(blogRepository: BlogRepository, authValidator: AuthValidator) {
+  constructor(
+    blogRepository: BlogRepository,
+    authValidator: AuthValidator,
+    userRepository: UserRepository
+  ) {
     this.blogRepository = blogRepository;
     this.authValidator = authValidator;
+    this.userRepository = userRepository;
   }
 
   public getRoutes = (): Router.IMiddleware => {
@@ -51,13 +58,15 @@ export default class BlogController {
    */
 
   public createPost = async (ctx: ParameterizedContext): Promise<void> => {
-    const { title, content, imagePost } = ctx.request.body;
+    const { title, content, imagePost, username } = ctx.request.body;
 
     if (!title) ctx.throw(400, "Title has not been specified");
 
     if (!content) ctx.throw(400, "Content has not been specified");
 
-    await this.blogRepository.createPost(content, imagePost, title);
+    if (!username) ctx.throw(400, "Username has not been specified");
+
+    await this.blogRepository.createPost(content, imagePost, title, username);
 
     ctx.status = 201;
   };
