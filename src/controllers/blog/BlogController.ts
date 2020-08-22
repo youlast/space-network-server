@@ -31,7 +31,7 @@ export default class BlogController {
         )
         .put(
           "/blog/update_post",
-          this.authValidator.validateAuth,
+
           this.updatePost
         )
         .delete(
