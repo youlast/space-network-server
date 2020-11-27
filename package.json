@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "npm-run-all --parallel run-tsc run-nodemon",
+    "start": "npm-run-all --parallel run-tsc run-nodemon",
     "create-doc": "apidoc -i ./src -o ./apidoc",
     "run-tsc": "tsc -w",
     "run-nodemon": "nodemon ./dist/src/index.js"
@@ -35,9 +35,10 @@
     "apidoc": "^0.23.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
+    "heroku": "^7.47.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
-    "knex": "^0.21.3",
+    "knex": "^0.21.12",
     "koa": "^2.12.0",
     "koa-bodyparser": "^4.3.0",
     "koa-generic-session": "^2.0.4",

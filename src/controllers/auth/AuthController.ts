@@ -71,6 +71,10 @@ export default class AuthController implements BaseController {
       username
     );
 
+    ctx.body = {
+      hello: "hello",
+    };
+
     ctx.status = 200;
   };
 

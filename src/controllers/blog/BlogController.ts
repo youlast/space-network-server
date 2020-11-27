@@ -118,20 +118,21 @@ export default class BlogController {
    */
 
   public updatePost = async (ctx: ParameterizedContext): Promise<void> => {
-    const { title, imagePost, content, idPost } = ctx.request.body;
+    const { title, imagePost, content, id } = ctx.request.body;
 
     if (!title) ctx.throw(400, "Title has not been specified");
 
     if (!content) ctx.throw(400, "Content has not been specified");
 
-    if (!idPost) ctx.throw(400, "IdPost has not been specified");
+    if (!id) ctx.throw(400, "id has not been specified");
 
-    if (idPost) {
-      await this.blogRepository.updatePost(title, content, imagePost, idPost);
+    if (id) {
+      await this.blogRepository.updatePost(title, content, imagePost, id);
     } else {
-      ctx.throw(400, "IdPost has not been specified");
+      ctx.throw(400, "id has not been specified");
     }
-
+    
+    ctx.response.body = { ...ctx.request.body };
     ctx.status = 200;
   };
 
